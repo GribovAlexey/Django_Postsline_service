@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> {{post.title}} </h1>
+<h3> by {{post.author.first_name}}</h3>
+</br>
+{{post.content}}
+
+</br></br>
+<a href="{% url 'update_post' post.pk %}"> Edit Post </a>
+</br>
+<a href="{% url 'home' %}"> Back to articles </a>
+
+{% endblock %}

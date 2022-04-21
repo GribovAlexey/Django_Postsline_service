@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1> Posts </h1>
+
+<ul>
+    {%for post in object_list %}
+    <!-- #{% if user %}-->
+    <li>
+        <a href="{% url 'article-detail' post.pk %}"> {{post.title}}</a>
+        by {{post.author.first_name}}
+        <div>{{post.content}}</div>
+        </br>
+    </li>
+    <!-- #{% elif post.access == "Public" %}}
+        <li>
+        <a href="{% url 'article-detail' post.pk %}"> {{post.title}}</a>
+        by {{post.author.first_name}}
+        <div>{{post.content}}</div>
+        </br>
+    </li>
+    {%endif%}
+    -->
+
+    {%endfor%}
+</ul>
+{% endblock %}
