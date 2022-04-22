@@ -13,15 +13,24 @@
         <a class="navbar-brand" href="{% url 'home' %}"> My django blog</a>
         <div>
           <ul>
-            <li>
-              <a href="{% url 'add_post' %}"> Create Post </a>
-            </li>
-            <li>
-              <a href="{% url 'register' %}"> Register </a>
-            </li>
-            <li>
-              <a href="{% url 'login' %}"> Log In </a>
-            </li>
+              {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'add_post' %}"> Create Post </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}"> Log Out </a>
+                </li>
+              {% else %}
+                <li>
+                     <a href="{% url 'register' %}"> Register </a>
+                </li>
+                 <li>
+                     <a href="{% url 'login' %}"> Log In </a>
+                </li>
+              {% endif %}
+
+
+
           </ul>
         </div>
       </nav>
