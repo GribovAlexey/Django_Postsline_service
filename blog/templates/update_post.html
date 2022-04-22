@@ -3,15 +3,19 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-<h1> Update post </h1>
+    {% if user.id == post.author.id %}
+        <h1> Update post </h1>
 
-<form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button class="btn btn-secondary"> Update </button>
-</form>
+        <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button class="btn btn-secondary"> Update </button>
+        </form>
+    {% else %}
+            <h1> Not Yours</h1>
+    {% endif %}
 {% else %}
-<h1> Log In before post edition </h1>
+        <h1> Log In before post edition </h1>
 {% endif %}
 
 {% endblock %}
