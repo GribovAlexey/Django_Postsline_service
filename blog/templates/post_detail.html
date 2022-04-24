@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{%block title %} Post details {% endblock %}
+{% block content %}
+
+<h1> {{post.title}} </h1>
+<h3> by {{post.author.first_name}}</h3>
+</br>
+{{post.content}}
+
+</br></br>
+
+{% if form %}
+    <h1> EDIT post {% url 'post_detail' post.id %}</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+
+        <button class="btn btn-secondary"> Edit </button>
+    </form>
+{% else %}
+    <h1> Log In before post creation</h1>
+{% endif %}
+
+<a href="{% url 'home' %}"> Back to articles </a>
+
+{% endblock %}
+

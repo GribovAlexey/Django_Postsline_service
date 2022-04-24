@@ -4,24 +4,25 @@
 <h1> Posts for you down below </h1>
 
 <ul>
-    {%for post in object_list %}
-    <!-- #{% if user %}-->
+    {%for post in posts %}
     <li>
-        <a href="{% url 'article-detail' post.pk %}"> {{post.title}}</a>
+        <a href="{% url 'post_detail' post.pk %}"> {{post.title}}</a>
         by {{post.author.first_name}}
         <div>{{post.content}}</div>
         </br>
     </li>
-    <!-- #{% elif post.access == "Public" %}}
-        <li>
-        <a href="{% url 'article-detail' post.pk %}"> {{post.title}}</a>
-        by {{post.author.first_name}}
-        <div>{{post.content}}</div>
-        </br>
-    </li>
-    {%endif%}
-    -->
-
     {%endfor%}
 </ul>
+
+{% if form %}
+    <h1> Create post </h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button class="btn btn-secondary"> Post </button>
+    </form>
+{% else %}
+    <h1> Log In before post creation</h1>
+{% endif %}
 {% endblock %}
