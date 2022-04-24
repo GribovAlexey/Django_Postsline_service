@@ -1,7 +1,9 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
+from django.urls import reverse
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -17,7 +19,9 @@ class UserRegisterView(APIView):
 
     def post(self, request):
         form = UserCreationForm(request.POST)
-        form.is_valid()
+        if not form.is_valid():
+            return redirect('register')
+
         form.save()
         username = form.cleaned_data.get('username')
         raw_password = form.cleaned_data.get('password1')

@@ -25,7 +25,7 @@ class ListPostsView(APIView):
             return Response("No permission to add a post")
         body = json.loads(request.body)
         new_post = Post(content=body['content'], title=body["title"],
-                        author=User.objects.get(id=1),
+                        author=User.objects.get(id=request.user.id),
                         is_public=body["is_public"])
         new_post.save()
         return Response("Ok")
